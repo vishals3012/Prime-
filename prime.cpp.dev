@@ -1,62 +1,38 @@
-[Project]
-FileName=prime.cpp.dev
-Name=prime.cpp
-Type=1
-Ver=2
-ObjFiles=
-Includes=
-Libs=
-PrivateResource=
-ResourceIncludes=
-MakeIncludes=
-Compiler=
-CppCompiler=
-Linker=
-IsCpp=1
-Icon=
-ExeOutput=
-ObjectOutput=
-LogOutput=
-LogOutputEnabled=0
-OverrideOutput=0
-OverrideOutputName=
-HostApplication=
-UseCustomMakefile=0
-CustomMakefile=
-CommandLine=
-Folders=
-IncludeVersionInfo=0
-SupportXPThemes=0
-CompilerSet=3
-CompilerSettings=0000000100000000000000000
-UnitCount=1
+#include <iostream>
+using namespace std;
+bool check_prime(int n);
+int main() {
+  int n, i;
+  bool flag = false;
+  cout << "Enter a positive  integer: ";
+  cin >> n;
+  for(i = 2; i <= n/2; ++i) {
+    if (check_prime(i)) {
+      if (check_prime(n - i)) {
+        cout << n << " = " << i << " + " << n-i << endl;
+        flag = true;
+      }
+    }
+  }
 
-[VersionInfo]
-Major=1
-Minor=0
-Release=0
-Build=0
-LanguageID=1033
-CharsetID=1252
-CompanyName=
-FileVersion=
-FileDescription=Developed using the Dev-C++ IDE
-InternalName=
-LegalCopyright=
-LegalTrademarks=
-OriginalFilename=
-ProductName=
-ProductVersion=
-AutoIncBuildNr=0
-SyncProduct=1
+  if (!flag)
+    cout << n << " can't be expressed as sum of two prime numbers.";
 
-[Unit1]
-FileName=prime.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
+  return 0;
+}
+// check prime number
+bool check_prime(int n) {
+  int i;
+  bool is_prime = true;
+  // 0 and 1 are not prime numbers
+  if (n == 0 || n == 1) {
+    is_prime = false;
+  }
+    for(i = 2; i <= n/2; ++i) {
+    if(n % i == 0) {
+      is_prime = false;
+      break;
+    }
+  }
+return is_prime;
+}
